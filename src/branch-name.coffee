@@ -37,7 +37,7 @@ module.exports = (robot) ->
     for count in votesCounts 
       msg.send "#{count[1]} votes for #{count[0]}"
 
-regex = new RegExp /\s*(\d+_\w[\w_]*)\s*/
+regex = new RegExp /^\s*(\d+_\w[\w_]*)\s*$/
 
 
 
