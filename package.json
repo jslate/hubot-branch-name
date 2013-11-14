@@ -1,0 +1,31 @@
+{
+  "name": "hubot-branch-name",
+  "version": "1.0.0",
+  "description": "Keeps a tally of branch names by number, i.e. 113_dead_pigeons",
+  "main": "index.coffee",
+  "author": {
+    "name": "Jonathan Slate",
+    "email": "jonathan@slatefamily.net",
+    "url": "https://github.com/jslate"
+  },
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "git",
+    "branch"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jslate/hubot-branch-name",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jslate/hubot-branch-name.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jslate/hubot-branch-name/issues"
+  },
+  "dependencies": {
+    "hubot": ">= 2.4.3",
+    "coffee-script": "~1.6"
+  },
+  "devDependencies": {}
+}
