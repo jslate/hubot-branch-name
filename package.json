@@ -1,6 +1,6 @@
 {
   "name": "hubot-branch-name",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Keeps a tally of branch names by number, i.e. 113_dead_pigeons",
   "main": "index.coffee",
   "author": {
