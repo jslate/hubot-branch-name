@@ -3,7 +3,7 @@
 #
 # Commands:
 #   <number>_<name> - vote for a name
-#   hubot [branch|tag] votes <number> - show votes counts
+#   hubot (branch|tag) votes <number> - show votes counts
 
 _ = require 'underscore'
 
