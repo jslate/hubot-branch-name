@@ -1,41 +1,44 @@
 # Description:
-#   Vote for a name for a branch
+#   Vote for a name for a branch or tag
 #
 # Commands:
 #   <number>_<name> - vote for a name
-#   hubot brach votes <number> - show votes counts
+#   hubot [branch|tag] votes <number> - show votes counts
+
+_ = require 'underscore'
+
+votes_message = (name, votes) ->
+  "#{votes.length} vote#{if votes.length==1 then '' else 's'} for #{name} #{if votes.length > 0 then '(' + votes.join(', ') + ')' else ''}"
 
 module.exports = (robot) ->
 
   robot.hear regex, (msg) ->
     name = msg.match[1]
-    number = name.match(/^\d*/)
+    number = name.match(/^\d*/)[0]
+    user = msg.message.user.name
     @robot.brain.data.votes ||= {}
     @robot.brain.data.votes[number] ||= {}
- 
-    votes = @robot.brain.data.votes[number][name]
-    votes = if votes? then votes + 1 else 1
-    @robot.brain.data.votes[number][name] = votes
+    @robot.brain.data.votes[number][name] ||= []
 
-    msg.send "#{votes} votes for #{name}"
+    _.each @robot.brain.data.votes[number], (value, key) =>
+      @robot.brain.data.votes[number][key] = _.without(value, user)
+    @robot.brain.data.votes[number][name].push(user)
 
-  robot.respond /branch votes (.*)$/i, (msg) ->
-    number = msg.match[1]
-    
+    msg.send "#{user} voted for #{name}"
+    msg.send votes_message(name, @robot.brain.data.votes[number][name])
+
+  robot.respond /(branch|tag) votes (.*)$/i, (msg) ->
+    number = msg.match[2]
+
     unless @robot.brain.data.votes?
       msg.send 'No votes!'
-      return 
+      return
     unless @robot.brain.data.votes[number]?
       msg.send "No votes for #{number}!"
       return
 
-    votesCounts = [] 
-    for key in Object.keys(@robot.brain.data.votes[number]) 
-      votesCounts.push [key, @robot.brain.data.votes[number][key]]
-    votesCounts.sort (a,b) -> a[1] - b[1]
-
-    for count in votesCounts 
-      msg.send "#{count[1]} votes for #{count[0]}"
+    _.each @robot.brain.data.votes[number], (v, k) ->
+      msg.send votes_message(k, v)
 
 regex = new RegExp /^\s*(\d+_\w[\w_]*)\s*$/
 

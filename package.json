@@ -1,6 +1,6 @@
 {
   "name": "hubot-branch-name",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Keeps a tally of branch names by number, i.e. 113_dead_pigeons",
   "main": "index.coffee",
   "author": {
@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "hubot": ">= 2.4.3",
-    "coffee-script": "~1.6"
+    "coffee-script": "~1.6",
+    "underscore": "~1.8.3"
   },
   "devDependencies": {}
 }
